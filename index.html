@@ -399,22 +399,43 @@ h2.h-section{
    PROCEDURE CARDS / FORMATS
    ============================================================ */
 .proc-card{
-  border:1px solid var(--line); border-radius:12px; padding:22px; background:var(--white);
+  border:1px solid var(--line); border-left:3px solid var(--navy); border-radius:10px 12px 12px 10px; padding:22px; background:var(--white);
   transition:border-color .2s;
 }
-.proc-card:hover{ border-color:#C7D2DC; }
+.proc-card:hover{ border-color:#C7D2DC; border-left-color:var(--navy); }
 .proc-card__head{ display:flex; align-items:center; gap:13px; margin-bottom:10px; }
 .proc-card__head .icon{ color:var(--navy); width:26px; height:26px; flex:none; }
 .proc-card__head h3{ font-size:15.5px; }
 .proc-card__text{ font-size:13.3px; color:var(--slate); line-height:1.55; }
 
-.format-row{
-  display:flex; align-items:center; gap:16px; padding:18px 20px;
-  border:1px solid var(--line); border-radius:12px; background:var(--white); margin-bottom:12px;
+/* colored "tag" label distinguishing the two groups within Procedimentos */
+.section-tag{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  padding:7px 14px; border-radius:20px; margin-bottom:20px;
 }
-.format-row .icon{ color:var(--navy); flex:none; }
+.section-tag::before{ content:""; width:7px; height:7px; border-radius:50%; background:currentColor; }
+.section-tag--navy{ background:rgba(11,61,99,.08); color:var(--navy); }
+.section-tag--gold{ background:rgba(198,138,46,.12); color:#9C6A1E; }
+
+/* Formatos de aplicação: wrapped in its own tinted panel to read as a distinct module */
+.formats-panel{
+  background:rgba(198,138,46,.045);
+  border:1px solid rgba(198,138,46,.22);
+  border-radius:16px;
+  padding:26px;
+}
+.format-row{
+  display:flex; align-items:center; gap:16px; padding:16px 18px;
+  border:1px solid rgba(198,138,46,.22); border-left:3px solid var(--gold); border-radius:10px 12px 12px 10px;
+  background:var(--white); margin-bottom:12px;
+}
+.format-row:last-of-type{ margin-bottom:0; }
+.format-row .icon{ color:#9C6A1E; flex:none; }
 .format-row h4{ font-size:14.5px; margin-bottom:3px; }
 .format-row p{ font-size:12.5px; color:var(--slate); }
+.formats-panel .more{ margin-top:18px; }
+.formats-panel .more__btn{ color:#9C6A1E; }
 
 /* ============================================================
    PHOTO-BG SECTION (cuidados)
@@ -1038,7 +1059,7 @@ h2.h-section{
 
     <div class="grid split split--proc">
       <div>
-        <p style="font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--slate-soft); margin-bottom:18px;">Principais procedimentos metodológicos</p>
+        <span class="section-tag section-tag--navy">Principais procedimentos metodológicos</span>
         <div class="grid grid-2">
 
           <div class="proc-card more-host">
@@ -1122,21 +1143,23 @@ h2.h-section{
       </div>
 
       <div>
-        <p style="font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--slate-soft); margin-bottom:18px;">Formatos de aplicação</p>
+        <span class="section-tag section-tag--gold">Formatos de aplicação</span>
 
-        <div class="format-row"><svg class="icon"><use href="#i-handshake"/></svg><div><h4>Presencial</h4><p>Encontros diretos, relação face a face.</p></div></div>
-        <div class="format-row"><svg class="icon"><use href="#i-laptop"/></svg><div><h4>Digital</h4><p>Plataformas online, alcance ampliado.</p></div></div>
-        <div class="format-row"><svg class="icon"><use href="#i-shuffle"/></svg><div><h4>Híbrido</h4><p>Combinação de presencial e digital.</p></div></div>
-        <div class="format-row"><svg class="icon"><use href="#i-map"/></svg><div><h4>Itinerante</h4><p>Vai aos territórios e comunidades.</p></div></div>
+        <div class="formats-panel">
+          <div class="format-row"><svg class="icon"><use href="#i-handshake"/></svg><div><h4>Presencial</h4><p>Encontros diretos, relação face a face.</p></div></div>
+          <div class="format-row"><svg class="icon"><use href="#i-laptop"/></svg><div><h4>Digital</h4><p>Plataformas online, alcance ampliado.</p></div></div>
+          <div class="format-row"><svg class="icon"><use href="#i-shuffle"/></svg><div><h4>Híbrido</h4><p>Combinação de presencial e digital.</p></div></div>
+          <div class="format-row"><svg class="icon"><use href="#i-map"/></svg><div><h4>Itinerante</h4><p>Vai aos territórios e comunidades.</p></div></div>
 
-        <div class="more more-host" style="margin-top:8px; padding:4px 4px 0;">
-          <button class="more__btn" aria-expanded="false"><span class="plus" aria-hidden="true"></span> Qual formato escolher?</button>
-          <div class="more__body"><div class="more__content"><div class="more__inner">
-            <p><strong>Online</strong> — grande volume de dados, de forma rápida e assíncrona.</p>
-            <p><strong>Presencial</strong> — debates complexos, mediação de conflitos, públicos sem acesso à tecnologia.</p>
-            <p><strong>Híbrido</strong> — máxima inclusão: profundidade presencial + alcance digital.</p>
-            <p><strong>Itinerante</strong> — públicos dispersos, no cotidiano (ruas, praças, transportes).</p>
-          </div></div></div>
+          <div class="more more-host">
+            <button class="more__btn" aria-expanded="false"><span class="plus" aria-hidden="true"></span> Qual formato escolher?</button>
+            <div class="more__body"><div class="more__content"><div class="more__inner">
+              <p><strong>Online</strong> — grande volume de dados, de forma rápida e assíncrona.</p>
+              <p><strong>Presencial</strong> — debates complexos, mediação de conflitos, públicos sem acesso à tecnologia.</p>
+              <p><strong>Híbrido</strong> — máxima inclusão: profundidade presencial + alcance digital.</p>
+              <p><strong>Itinerante</strong> — públicos dispersos, no cotidiano (ruas, praças, transportes).</p>
+            </div></div></div>
+          </div>
         </div>
       </div>
     </div>
